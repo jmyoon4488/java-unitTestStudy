@@ -14,15 +14,51 @@ public class BaseballGame {
     }
 
     public void playGame() {
+        // 컴퓨터, 플레이어 생성
+        Computer computer = new Computer();
+        System.out.println(START_GAME_MSG);
+        while(isGamePlaying) {
+            Player player = new Player();
+            computer.generateNumberSet();
+            startPlayerInput(computer, player);
+            System.out.println(FINISH_GAME_MSG);
+            System.out.println(REPLAY_MSG);
+            isGamePlaying = player.requestInput(false) == 1;
+        }
     }
 
     public void startPlayerInput(Computer computer, Player player) {
+        while (player.getStrikeCount() < 3) {
+            player.initBallCount();
+            String resultText = getDiffResultText(computer, player, player.requestInput(true));
+            System.out.println(resultText);
+        }
     }
 
     public String getDiffResultText(Computer c, Player p, int number) {
+        if (number == BaseballGame.INPUT_ERROR) return INVALID_INPUT_MSG;
+        p.convertNumberToList(number);
+        for (int i = 0; i < p.getNumberList().size(); i++) {
+            calcBallCount(c, p, i);
+        }
+        String ballCountTxt = "";
+        if (p.getStrikeCount() == 0 && p.getBallCount() == 0) ballCountTxt = "낫싱";
+        if (p.getStrikeCount() > 0) ballCountTxt += p.getStrikeCount() + " 스트라이크";
+        if (p.getBallCount() > 0) ballCountTxt += " " + p.getBallCount() + " 볼";
+        return ballCountTxt.trim();
     }
 
     public CountType calcBallCount(Computer c, Player p, int playerNumberIndex) {
+        int computerNumberIndex = c.getCheckNumbers().indexOf(p.getNumberList().get(playerNumberIndex));
+        if (computerNumberIndex == playerNumberIndex) {
+            p.setStrikeCount(p.getStrikeCount() + 1);
+            return CountType.STRIKE;
+        }
+        if (computerNumberIndex != BaseballGame.INPUT_ERROR) {
+            p.setBallCount(p.getBallCount() + 1);
+            return CountType.BALL;
+        }
+        return CountType.NOTHING;
     }
 
     enum CountType {
