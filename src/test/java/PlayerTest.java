@@ -19,15 +19,4 @@ class PlayerTest {
         player = new Player();
     }
 
-    @Test
-    @DisplayName("입력된 값이 0이 포함되지 않은 3자리 숫자로만 이루어져 있는지 검증")
-    public void validInputString() {
-    }
-
-    @ParameterizedTest
-    @ValueSource(ints = {1, 2, 3})
-    @DisplayName("숫자의 각 자리수를 배열로 변환")
-    public void convertIntToArray(int input) {
-    }
-
 }

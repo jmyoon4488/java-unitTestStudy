@@ -2,15 +2,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Player {
-    public int requestInput(boolean isPlaying) {
-        return 0;
-    }
+    private int strikeCount = 0;
+    private int ballCount = 0;
+    private Ball ball = null;
 
-    public int checkUserInput(String txt) {
-        return 0;
-    }
-
-    public int getValidInput(String text) throws NumberFormatException {
-        return 0;
+    public Player() {
+        this.ball = new Ball();
     }
 }
