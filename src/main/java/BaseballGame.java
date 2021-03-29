@@ -17,18 +17,8 @@ public class BaseballGame {
     public static int BALL_SIZE_OPTION = 3;
 
     public void playGame() {
-        Computer computer = readyToComputer();
-        Player player = readyToPlayer();
-    }
-
-    private Player readyToPlayer() {
+        Computer computer = new Computer();
+        computer.getRandomBallNumber();
         Player player = new Player();
-        return player;
-    }
-
-    private Computer readyToComputer() {
-        Computer com = new Computer();
-        com.getRandomBallNumber();
-        return com;
     }
 }
