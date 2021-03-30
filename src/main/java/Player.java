@@ -9,4 +9,18 @@ public class Player {
     public Player() {
         this.ball = new Ball();
     }
+
+    public void requestPlayerNumber() {
+        Scanner sc = new Scanner(System.in);
+        String input = sc.next();
+        setPlayerNumberToBall(input);
+    }
+
+    private void setPlayerNumberToBall(String input) {
+        char[] inputCharArr = input.toCharArray();
+    }
+
+    public boolean validInput(String input) {
+        return false;
+    }
 }

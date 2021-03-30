@@ -17,8 +17,8 @@ class ComputerTest {
     @Test
     @DisplayName("Get Random number")
     void getRandomNumber() {
-        String randomNumberStr = computer.getRandomBallNumber();
-        assertThat(randomNumberStr)
+        computer.getRandomBallNumber();
+        assertThat(computer.getBall().getBallNumberStr())
                 .isNotEmpty();
     }
 

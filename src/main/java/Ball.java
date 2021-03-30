@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class Ball {
     public static final String STR_STRIKE = "스트라이크";
@@ -29,7 +30,16 @@ public class Ball {
             baseNumber.remove(randomIndex);
         }
     }
-    
+
+    public boolean validBallNumberArr() {
+        for (int i = 0; i < ballNumberArr.length - 1; i++) {
+            for (int j = i + 1; j < ballNumberArr.length; j++) {
+                if (this.ballNumberArr[i] == this.ballNumberArr[j]) return false;
+            }
+        }
+        return true;
+    }
+
     private int getRandomIndex(ArrayList<Integer> baseNumbers) {
         return (int) (Math.random() * (baseNumbers.size() - 1));
     }

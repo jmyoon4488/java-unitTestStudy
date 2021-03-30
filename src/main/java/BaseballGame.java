@@ -16,9 +16,20 @@ public class BaseballGame {
     private boolean isRegame = true;
     public static int BALL_SIZE_OPTION = 3;
 
+    Computer computer;
+    Player player;
+
     public void playGame() {
-        Computer computer = new Computer();
+        computer = new Computer();
         computer.getRandomBallNumber();
-        Player player = new Player();
+        player = new Player();
+
+        requestPlayerInput();
     }
+
+    private void requestPlayerInput() {
+        player.requestPlayerNumber();
+    }
+
+
 }
