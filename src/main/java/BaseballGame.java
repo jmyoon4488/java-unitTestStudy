@@ -25,10 +25,19 @@ public class BaseballGame {
         player = new Player();
 
         requestPlayerInput();
+        player.requestPlayerNumber();
+
+        comparePlayerWithComputer(computer, player);
+    }
+
+    private void comparePlayerWithComputer(Computer computer, Player player) {
+        Ball cBall = computer.ball;
+        Ball pBall = player.ball;
+
     }
 
     private void requestPlayerInput() {
-        player.requestPlayerNumber();
+        // TODO
     }
 
 

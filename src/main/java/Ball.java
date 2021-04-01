@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Scanner;
 
 public class Ball {
     public static final String STR_STRIKE = "스트라이크";
@@ -42,5 +41,21 @@ public class Ball {
 
     private int getRandomIndex(ArrayList<Integer> baseNumbers) {
         return (int) (Math.random() * (baseNumbers.size() - 1));
+    }
+
+    public boolean setBallNumber(String input) {
+        char[] chars = input.toCharArray();
+        if (chars.length != BaseballGame.BALL_SIZE_OPTION) return false;
+        for (int i = 0; i < BaseballGame.BALL_SIZE_OPTION; i++) {
+            int convertedNum = convertCharToInt(chars[i]);
+            if (convertedNum == -1) return false;
+            ballNumberArr[i] = Integer.parseInt(String.valueOf(chars[i]));
+        }
+        return true;
+    }
+
+    private int convertCharToInt(char ch) {
+        if ('0' <= ch && ch <= '9') return Integer.parseInt(String.valueOf(ch));
+        return -1;
     }
 }

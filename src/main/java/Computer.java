@@ -1,7 +1,7 @@
 import java.util.*;
 
 public class Computer {
-    private Ball ball;
+    public Ball ball;
 
     public Computer() {
         this.ball = new Ball();
@@ -9,9 +9,5 @@ public class Computer {
 
     public void getRandomBallNumber() {
         ball.generateRandomBallState();
-    }
-
-    public Ball getBall() {
-        return ball;
     }
 }

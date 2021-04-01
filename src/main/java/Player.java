@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class Player {
     private int strikeCount = 0;
     private int ballCount = 0;
-    private Ball ball = null;
+    public Ball ball = null;
 
     public Player() {
         this.ball = new Ball();
@@ -17,7 +17,8 @@ public class Player {
     }
 
     private void setPlayerNumberToBall(String input) {
-        char[] inputCharArr = input.toCharArray();
+        boolean isValidInput = this.ball.setBallNumber(input);
+
     }
 
     public boolean validInput(String input) {
