@@ -1,27 +1,18 @@
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
 
 public class Ball {
-    public static final String STR_STRIKE = "스트라이크";
-    public static final String STR_BALL = "볼";
+    public static final String STRIKE_STR = "스트라이크";
+    public static final String BALL_STR = "볼";
+    public static final String FOUR_BALL_STR = "포볼";
+    public static final String NOTHING_STR = "낫싱";
 
-    private String ballNumberStr = "";
-    public int[] ballNumberArr = null;
+    public Integer[] ballNumberArr = new Integer[BaseballGame.BALL_SIZE_OPTION];
 
-    public Ball () {
-        ballNumberStr = "";
-        ballNumberArr = new int[BaseballGame.BALL_SIZE_OPTION];
+    public void initBall() {
+        ballNumberArr = new Integer[BaseballGame.BALL_SIZE_OPTION];
     }
 
-    public String getBallNumberStr() {
-        return ballNumberStr;
-    }
-
-    public void setBallNumberStr(String ballNumberStr) {
-        this.ballNumberStr = ballNumberStr;
-    }
-
-    public void generateRandomBallState() {
+    public void generateRandomBallNumber() {
         ArrayList<Integer> baseNumber = new ArrayList<>(Arrays.asList(1,2,3,4,5,6,7,8,9));
         for (int i = 0; i < BaseballGame.BALL_SIZE_OPTION; i++) {
             int randomIndex = getRandomIndex(baseNumber);
@@ -30,11 +21,22 @@ public class Ball {
         }
     }
 
-    public boolean validBallNumberArr() {
-        for (int i = 0; i < ballNumberArr.length - 1; i++) {
-            for (int j = i + 1; j < ballNumberArr.length; j++) {
-                if (this.ballNumberArr[i] == this.ballNumberArr[j]) return false;
-            }
+    public boolean isSuccessBallNumberSetting(String input) {
+        char[] chars = input.toCharArray();
+        if (chars.length != BaseballGame.BALL_SIZE_OPTION) return false;
+        for (int i = 0; i < BaseballGame.BALL_SIZE_OPTION; i++) {
+            int convertedNum = convertCharToInt(chars[i]);
+            if (convertedNum == -1) return false;
+            ballNumberArr[i] = convertedNum;
+        }
+        return true;
+    }
+
+    public boolean checkBallValidation() {
+        HashSet<Integer> checkSet = new HashSet<>();
+        for (int num : ballNumberArr) {
+            if (checkSet.contains(num)) return false;
+            checkSet.add(num);
         }
         return true;
     }
@@ -43,19 +45,35 @@ public class Ball {
         return (int) (Math.random() * (baseNumbers.size() - 1));
     }
 
-    public boolean setBallNumber(String input) {
-        char[] chars = input.toCharArray();
-        if (chars.length != BaseballGame.BALL_SIZE_OPTION) return false;
-        for (int i = 0; i < BaseballGame.BALL_SIZE_OPTION; i++) {
-            int convertedNum = convertCharToInt(chars[i]);
-            if (convertedNum == -1) return false;
-            ballNumberArr[i] = Integer.parseInt(String.valueOf(chars[i]));
-        }
-        return true;
-    }
-
     private int convertCharToInt(char ch) {
         if ('0' <= ch && ch <= '9') return Integer.parseInt(String.valueOf(ch));
         return -1;
     }
+
+    public String getBallNumberStr() {
+        StringBuilder sb = new StringBuilder();
+        for (int num : ballNumberArr) sb.append(num);
+        return sb.toString();
+    }
+
+    enum BALL_TYPE {
+        STRIKE(0, STRIKE_STR),
+        BALL(1, BALL_STR),
+        FOUR_BALL(2, FOUR_BALL_STR),
+        NOTHING(3, NOTHING_STR);
+
+        private int typeNum;
+        private String typeStr;
+
+        BALL_TYPE(int type, String str) {
+            this.typeNum = type;
+            this.typeStr = str;
+        }
+
+        public String getTypeStr() {
+            return typeStr;
+        }
+    }
 }
+
+
