@@ -1,13 +1,11 @@
-import java.util.*;
-
 public class Computer {
-    public Ball ball;
-
-    public Computer() {
-        this.ball = new Ball();
-    }
+    private Ball ball = new Ball();
 
     public void getRandomBallNumber() {
-        ball.generateRandomBallState();
+        ball.generateRandomBallNumber();
+    }
+
+    public Ball getBall() {
+        return ball;
     }
 }
